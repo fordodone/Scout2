@@ -12,14 +12,9 @@ services:
 
   scout2-web:
     container_name: scout2-web
-    image: python:3.6
-    working_dir: /app/scout2-report
+    image: nginx:alpine
     volumes:
-      - ./scout2-report:/app/scout2-report
+      - ./scout2-report:/usr/share/nginx/html:ro
     ports:
-      - '8000:8000'
-    command:
-      - 'python'
-      - '-m'
-      - 'http.server'
+      - '8000:80'
 
