@@ -1,0 +1,25 @@
+version: '2'
+services:
+  scout2:
+    container_name: scout2
+    image: scout2
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./scout2-report:/app/scout2-report
+      - $HOME/.aws:/root/.aws
+
+  scout2-web:
+    container_name: scout2-web
+    image: python:3.6
+    working_dir: /app/scout2-report
+    volumes:
+      - ./scout2-report:/app/scout2-report
+    ports:
+      - '8000:8000'
+    command:
+      - 'python'
+      - '-m'
+      - 'http.server'
+
